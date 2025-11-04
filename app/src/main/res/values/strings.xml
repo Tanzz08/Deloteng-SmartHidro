@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Deloteng SmartHidro</string>
+    <string name="title_home">Home</string>
+    <string name="title_panduan">Panduan</string>
+    <string name="title_notifications">Diagnosa</string>
+
+    <string name="desc">Tanaman sehat, panen optimal. Kenali gejala penyakit dari daun tanaman Anda dengan cepat</string>
+    <string name="ayo_mulai">Ayo Mulai!</string>
+    <string name="suhu">31°C</string>
+    <string name="desc1">Dapatkan panduan lengkap untuk menanam selada, hidroponik Anda. Pelajari cara merawat dan mengatasi penyakit umum.</string>
+    <string name="mulai_diagnosa">Mulai Diagnosa</string>
+    <string name="panduan_title">Panduan Penanaman</string>
+    <string name="btn_back">Tombol Kembali</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="diagnosa_title">Diagnosa Penyakit</string>
+
+</resources>
