@@ -11,10 +11,13 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_result)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setupActionBar()
+
+    }
+
+    private fun setupActionBar() {
+        (this as AppCompatActivity?)?.supportActionBar?.apply {
+            hide()
         }
     }
 }

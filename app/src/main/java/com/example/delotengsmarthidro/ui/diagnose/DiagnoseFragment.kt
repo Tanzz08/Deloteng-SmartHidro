@@ -1,60 +1,96 @@
 package com.example.delotengsmarthidro.ui.diagnose
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.delotengsmarthidro.R
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
+import com.example.delotengsmarthidro.MainViewModel
+import com.example.delotengsmarthidro.ViewModelFactory
+import com.example.delotengsmarthidro.databinding.FragmentDiagnoseBinding
+import com.example.delotengsmarthidro.helper.ImageClassifierHelper
+import com.yalantis.ucrop.UCrop
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DiagnoseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DiagnoseFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentDiagnoseBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diagnose, container, false)
+    ): View {
+        val factory = ViewModelFactory.getInstance(requireActivity().application)
+        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+
+        _binding = FragmentDiagnoseBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        return root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DiagnoseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DiagnoseFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
+
+    // mendapatkan hasil uCrop
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "super.onActivityResult(requestCode, resultCode, data)",
+        "androidx.fragment.app.Fragment"
+    )
+    )
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        @Suppress("DEPRECATION")
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            viewModel.croppedImageUri = UCrop.getOutput(data!!)
+            showImage()
+            binding.btnDiagnose.isEnabled = true
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            val cropError = UCrop.getError(data!!)
+            cropError?.let { Log.e("UCrop Error", it.message.toString()) }
+        } else if (resultCode == RESULT_CANCELED && requestCode == UCrop.REQUEST_CROP) {
+            viewModel.croppedImageUri = null
+            binding.btnDiagnose.isEnabled = false
+        }
+    }
+
+    private val launchGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            viewModel.currentImageUri = uri
+            startCrop(uri)
+        } else {
+            Log.d("Photo Picker", "No media selected")
+        }
+    }
+
+    private fun startCrop(uri: Uri) {
+        val destinationUri = Uri.fromFile(requireContext().cacheDir, "cropped_image.jpg")
+    }
+
+    private fun startGallery() {
+
+    }
+
+    private fun showImage() {
+        viewModel.croppedImageUri?.let {
+            binding.apply {
+                ivPicture.setImageURI(null)
+                ivPicture.setImageURI(it)
+            }
+        }
+    }
+
+
 }

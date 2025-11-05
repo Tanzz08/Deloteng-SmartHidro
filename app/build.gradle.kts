@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -56,4 +58,28 @@ dependencies {
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.session)
+
+    // TODO: Tambahkan Library TensorFlow Lite
+    implementation(libs.tensorflow.lite.task.vision)
+
+    // library retorfit dan pendukungnya
+    implementation(libs.glide)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+    // glide
+    implementation (libs.glide)
+
+    // library Room dan pendukungnya
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v294)
+    implementation(libs.androidx.lifecycle.livedata.ktx.v294)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
+    // uCrop
+    implementation(libs.ucrop)
+
+
+
 }
