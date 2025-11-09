@@ -16,6 +16,9 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", "\"a1d91f746849c525b26c14cf44cd7a6f\"")
+
     }
 
     buildTypes {
@@ -38,6 +41,7 @@ android {
     buildFeatures {
         viewBinding = true
         mlModelBinding = true
+        buildConfig = true
     }
 }
 
@@ -81,4 +85,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // library google play service location
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
 }

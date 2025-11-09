@@ -18,6 +18,8 @@ retrofit = "2.11.0"
 room = "2.6.1"
 tensorflowLite = "0.4.4"
 ucrop = "2.2.8"
+playServicesLocation = "21.3.0"
+playServicesMaps = "19.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,6 +63,10 @@ ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitExt" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

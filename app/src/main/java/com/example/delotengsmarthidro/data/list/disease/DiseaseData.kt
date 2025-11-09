@@ -111,8 +111,6 @@ object DiseaseData {
     )
 
     fun findByLabel(label: String): Disease? {
-        // .find akan mencari item pertama yang cocok
-        // ignoreCase = true penting agar "Bacterial Spot" sama dengan "bacterial spot"
         return diseaseList.find { it.modelKey.equals(label, ignoreCase = true) }
     }
 }

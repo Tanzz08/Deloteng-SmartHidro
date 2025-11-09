@@ -34,7 +34,6 @@ class PanduanFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Menghapus ViewModelProvider yang tidak terpakai agar lebih bersih
         _binding = FragmentPanduanBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,27 +42,18 @@ class PanduanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Setup untuk Tutorial RecyclerView
         val tutorialData = DummyTutorialData.getTutorialSteps()
         val tutorialAdapter = TutorListAdapter(tutorialData)
-        // Panggil fungsi helper baru kita
         setupRecyclerView(binding.rvTuorial, tutorialAdapter)
 
-        // 2. Setup untuk Tips RecyclerView
         val tipsData = DummyTipsData.getTipsSolution()
         val tipsAdapter = TipsListAdapter(tipsData)
-        // Panggil fungsi helper yang sama
-        // MEMPERBAIKI BUG: Menggunakan binding.rvTips, bukan rvTuorial
+
         setupRecyclerView(binding.rvTips, tipsAdapter)
 
         initializePlayer()
     }
 
-    /**
-     * Fungsi helper baru untuk menghindari pengulangan kode.
-     * Fungsi ini mengatur LayoutManager, Adapter, dan NestedScrolling
-     * untuk RecyclerView yang diberikan.
-     */
     private fun setupRecyclerView(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>) {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
@@ -81,7 +71,6 @@ class PanduanFragment : Fragment() {
         }
     }
 
-    /** Hentikan dan reset player saat fragment tidak terlihat **/
     override fun onPause() {
         super.onPause()
         player?.pause()
