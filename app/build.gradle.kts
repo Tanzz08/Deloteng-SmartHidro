@@ -15,7 +15,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,6 +27,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -37,11 +37,11 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
     }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -51,35 +51,34 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 
+    // TensorFlow
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+    implementation(libs.tensorflow.lite.task.vision)
+
+    // Media3
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.session)
 
-    // TODO: Tambahkan Library TensorFlow Lite
-    implementation(libs.tensorflow.lite.task.vision)
-
-    // library retorfit dan pendukungnya
-    implementation(libs.glide)
+    // Retrofit & Logging
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
-    // glide
-    implementation (libs.glide)
+    // Glide
+    implementation(libs.glide)
 
-    // library Room dan pendukungnya
-    implementation(libs.androidx.lifecycle.viewmodel.ktx.v294)
-    implementation(libs.androidx.lifecycle.livedata.ktx.v294)
+    // Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
     // uCrop
     implementation(libs.ucrop)
 
-
-
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -109,7 +109,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
 
                 <ImageView
                     android:id="@+id/hero"
@@ -161,89 +162,63 @@
                     android:layout_marginEnd="8dp"
                     android:textColor="@color/text_color"/>
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview"
+                    tools:layout_height="300dp"
                     android:layout_margin="16dp"
-                    tools:layout_height="500dp"
-                    android:background="@drawable/corner_diagnose"
-                    android:elevation="4dp">
+                    android:padding="8dp"
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    android:orientation="vertical"
+                    android:background="@drawable/corner_diagnose">
+
+                    <TextView
+                        android:id="@id/tvLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Bacterial Spot"
+                        android:textColor="@color/color_label"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+ 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ciri-ciri"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvCiri"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_color"
+                        tools:text="@tools:sample/lorem/random"/>
 
-                        <TextView
-                            android:id="@+id/tvLabel"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:text="Bacterial Spot"
-                            android:textColor="@color/color_label"
-                            android:textStyle="bold"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cara Mengatasi"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"/>
 
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/tvLabel"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@id/tvLabel"
-                            android:text="Ciri-ciri:"
-                            android:layout_marginTop="8dp"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/tvSolution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_color"
+                        tools:text="@tools:sample/lorem/random"/>
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tvCiri"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/text_color"
-                            app:layout_constraintStart_toStartOf="@id/textView2"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/textView2"
-                            tools:text="Lorem ipsum dolor sit amet consectetur. Arcu eu sit auctor pulvinar non nibh. Nisl habitasse urna aliquam quis aliquet sit. Sed dictumst orci massa id nec fusce malesuada aliquam tellus. At sapien arcu tincidunt risus gravida consequat donec. Eget sed tincidunt erat amet ut dui hac eu. Turpis cras dolor in cursus in suspendisse orci fusce aliquet. Donec phasellus sapien enim scelerisque cursus ullamcorper. Porttitor tortor consectetur in cursus. " />
-
-                        <TextView
-                            android:id="@+id/textView3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/tvCiri"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@id/tvCiri"
-                            android:text="Cara Mengatasi:"
-                            android:layout_marginTop="8dp"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/tvSolution"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/text_color"
-                            app:layout_constraintStart_toStartOf="@id/textView3"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/textView3"
-                            tools:text="Lorem ipsum dolor sit amet consectetur. Arcu eu sit auctor pulvinar non nibh. Nisl habitasse urna aliquam quis aliquet sit. Sed dictumst orci massa id nec fusce malesuada aliquam tellus. At sapien arcu tincidunt risus gravida consequat donec. Eget sed tincidunt erat amet ut dui hac eu. Turpis cras dolor in cursus in suspendisse orci fusce aliquet. Donec phasellus sapien enim scelerisque cursus ullamcorper. Porttitor tortor consectetur in cursus. " />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </FrameLayout>
 
 
 

@@ -6,7 +6,9 @@ import androidx.activity.enableEdgeToEdge
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -41,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBar()
 
+        hideSystemUI()
+
         // Cek apakah ini pertama kali aplikasi dibuka
         val preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE)
         val isFirstRun = preferences.getBoolean("isFirstRun", true)
@@ -61,6 +65,23 @@ class MainActivity : AppCompatActivity() {
     private fun setupActionBar() {
         (this as AppCompatActivity?)?.supportActionBar?.apply {
             hide()
+        }
+    }
+
+    private fun hideSystemUI() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        val controller = WindowInsetsControllerCompat(window, binding.root)
+        controller.hide(WindowInsetsCompat.Type.systemBars())
+        controller.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+
+    /** Optional: munculkan lagi saat activity fokus hilang **/
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemUI()
         }
     }
 }
