@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBar()
 
-        hideSystemUI()
-
         // Cek apakah ini pertama kali aplikasi dibuka
         val preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE)
         val isFirstRun = preferences.getBoolean("isFirstRun", true)
@@ -68,20 +66,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideSystemUI() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        val controller = WindowInsetsControllerCompat(window, binding.root)
-        controller.hide(WindowInsetsCompat.Type.systemBars())
-        controller.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-    }
-
-    /** Optional: munculkan lagi saat activity fokus hilang **/
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            hideSystemUI()
-        }
-    }
 }

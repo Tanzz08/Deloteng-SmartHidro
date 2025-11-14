@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.delotengsmarthidro.data.database.TutorialEntity
 import com.example.delotengsmarthidro.data.repository.MainRepository
 import com.example.delotengsmarthidro.data.response.WeatherResponse
 import com.example.delotengsmarthidro.utils.ResultState
@@ -37,4 +38,6 @@ class MainViewModel(
             }
         }
     }
+
+    fun getAllTutor(): LiveData<List<TutorialEntity>> = repository.getAllTutor()
 }

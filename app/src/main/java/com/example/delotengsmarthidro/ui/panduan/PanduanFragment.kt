@@ -12,10 +12,14 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dicoding.asclepius.viewmodel.ViewModelFactory
+import com.example.delotengsmarthidro.MainViewModel
+import com.example.delotengsmarthidro.MyApplication
 import com.example.delotengsmarthidro.R
 import com.example.delotengsmarthidro.adapter.TipsListAdapter
 import com.example.delotengsmarthidro.adapter.TutorListAdapter
@@ -28,6 +32,11 @@ class PanduanFragment : Fragment() {
     private var _binding: FragmentPanduanBinding? = null
     private val binding get() = _binding!!
     private var player:ExoPlayer? = null
+
+    private val mainViewModel: MainViewModel by viewModels {
+        val repository = (requireActivity().application as MyApplication).repository
+        ViewModelFactory.getInstance(repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,13 +51,15 @@ class PanduanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tutorialData = DummyTutorialData.getTutorialSteps()
-        val tutorialAdapter = TutorListAdapter(tutorialData)
+        val tutorialAdapter = TutorListAdapter()
         setupRecyclerView(binding.rvTuorial, tutorialAdapter)
+
+        mainViewModel.getAllTutor().observe(viewLifecycleOwner) { tutorialList ->
+            tutorialAdapter.submitList(tutorialList)
+        }
 
         val tipsData = DummyTipsData.getTipsSolution()
         val tipsAdapter = TipsListAdapter(tipsData)
-
         setupRecyclerView(binding.rvTips, tipsAdapter)
 
         initializePlayer()

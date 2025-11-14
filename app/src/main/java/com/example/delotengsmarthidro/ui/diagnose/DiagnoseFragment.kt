@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.asclepius.viewmodel.ViewModelFactory
 import com.example.delotengsmarthidro.MainViewModel
 import com.example.delotengsmarthidro.ResultActivity
+import com.example.delotengsmarthidro.data.di.Injection
 import com.example.delotengsmarthidro.databinding.FragmentDiagnoseBinding
 import com.example.delotengsmarthidro.helper.ImageClassifierHelper
 import com.yalantis.ucrop.UCrop
@@ -40,8 +41,9 @@ class DiagnoseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val factory = ViewModelFactory.getInstance(requireActivity().application)
-        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+        val repository = Injection.provideMainRepository(requireContext())
+        val factory = ViewModelFactory.getInstance(repository)
+        viewModel = ViewModelProvider(requireActivity(), factory).get(MainViewModel::class.java)
 
         _binding = FragmentDiagnoseBinding.inflate(inflater, container, false)
         val root: View = binding.root
