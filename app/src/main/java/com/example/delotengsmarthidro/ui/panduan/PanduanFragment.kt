@@ -1,6 +1,7 @@
 package com.example.delotengsmarthidro.ui.panduan
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,9 +24,13 @@ import com.example.delotengsmarthidro.MyApplication
 import com.example.delotengsmarthidro.R
 import com.example.delotengsmarthidro.adapter.TipsListAdapter
 import com.example.delotengsmarthidro.adapter.TutorListAdapter
+import com.example.delotengsmarthidro.data.database.TutorialEntity
 import com.example.delotengsmarthidro.data.list.tips.DummyTipsData
 import com.example.delotengsmarthidro.data.list.tutorial.DummyTutorialData
 import com.example.delotengsmarthidro.databinding.FragmentPanduanBinding
+import com.example.delotengsmarthidro.ui.detail.DetailActivity
+import com.example.delotengsmarthidro.ui.detail.NutrisiActivity
+import com.example.delotengsmarthidro.ui.detail.PembibitanActivity
 
 class PanduanFragment : Fragment() {
 
@@ -51,11 +56,16 @@ class PanduanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tutorialAdapter = TutorListAdapter()
-        setupRecyclerView(binding.rvTuorial, tutorialAdapter)
-
-        mainViewModel.getAllTutor().observe(viewLifecycleOwner) { tutorialList ->
-            tutorialAdapter.submitList(tutorialList)
+        binding.apply {
+            contentContainer.setOnClickListener {
+                navigateToDetail(DetailActivity::class.java)
+            }
+            tutor2.setOnClickListener {
+                navigateToDetail(PembibitanActivity::class.java)
+            }
+            tutor3.setOnClickListener {
+                navigateToDetail(NutrisiActivity::class.java)
+            }
         }
 
         val tipsData = DummyTipsData.getTipsSolution()
@@ -63,6 +73,11 @@ class PanduanFragment : Fragment() {
         setupRecyclerView(binding.rvTips, tipsAdapter)
 
         initializePlayer()
+    }
+
+    private fun navigateToDetail(destinationActivity: Class<*>) {
+        val intent = Intent(requireContext(), destinationActivity)
+        startActivity(intent)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<*>) {

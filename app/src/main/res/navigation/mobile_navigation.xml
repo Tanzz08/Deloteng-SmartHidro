@@ -15,11 +15,24 @@
         android:id="@+id/navigation_panduan"
         android:name="com.example.delotengsmarthidro.ui.panduan.PanduanFragment"
         android:label="@string/title_panduan"
-        tools:layout="@layout/fragment_panduan" />
+        tools:layout="@layout/fragment_panduan" >
+        <action
+            android:id="@+id/action_navigation_panduan_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_diagnose"
         android:name="com.example.delotengsmarthidro.ui.diagnose.DiagnoseFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_diagnose" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.delotengsmarthidro.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="tutorial"
+            app:argType="com.example.delotengsmarthidro.data.database.TutorialEntity" />
+    </fragment>
 </navigation>

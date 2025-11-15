@@ -1,6 +1,7 @@
 package com.example.delotengsmarthidro.data.database
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -9,7 +10,7 @@ import com.example.delotengsmarthidro.data.list.tutorial.DummyTutorialData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [TutorialEntity::class], version = 1, exportSchema = false)
+@Database(entities = [TutorialEntity::class], version = 2, exportSchema = true)
 abstract class TutorDatabase: RoomDatabase() {
     abstract fun tutorDao(): TutorDao
 
@@ -22,7 +23,7 @@ abstract class TutorDatabase: RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(TutorDatabase::class.java) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                        TutorDatabase::class.java, "tutor_db")
+                        TutorDatabase::class.java, "tutorial_db")
                         .addCallback(object : Callback() {
                             override fun onCreate(db: SupportSQLiteDatabase) {
                                 super.onCreate(db)

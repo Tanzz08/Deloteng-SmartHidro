@@ -23,4 +23,7 @@ data class TutorialEntity(
 
     @ColumnInfo(name = "icon")
     @DrawableRes var icon: Int? = null,
+
+    @ColumnInfo(name = "detail")
+    var detail: String? = null,
 ) : Parcelable

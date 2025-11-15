@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.NutrisiActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.home.HomeFragment"
+        android:background="@color/backhround"
+        android:paddingBottom="?attr/actionBarSize">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIconTint="@color/white">
+
+                <FrameLayout
+                    android:id="@+id/frameAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical">
+
+                    <ImageButton
+                        android:id="@+id/btnBack"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/btn_back"
+                        android:padding="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_arrow_back"
+                        app:shapeAppearanceOverlay="@style/imageViewCircle" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Persiapan Nutrisi"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="18sp" />
+
+                </FrameLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <View
+            android:id="@+id/shadow_view"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/shadow"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingBottom="16dp"
+            android:background="@drawable/corner_radius_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shadow_view"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvBahan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Langkah-langkah Formula Nutrisi"
+                    android:textColor="@color/color_label"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp" />
+
+                <TextView
+                    android:id="@+id/tvNomor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvBahan"
+                    android:layout_marginStart="16dp"
+                    android:text="1."
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/tvNomor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Pastikan setiap bahan ditimbang sesuai dengan kebutuhan konsentrasi larutan"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tvNomor"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tvNomor2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeader"
+                    android:layout_marginStart="16dp"
+                    android:text="2."
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvHeader2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/tvNomor2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Larutkan bahan satu per satu dalam air bersih"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tvNomor2"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tvNomor3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeader2"
+                    android:layout_marginStart="16dp"
+                    android:text="3."
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvHeader3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/tvNomor3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Pastikan larutan diaduk terus menerus hingga semua bahan terlarut sempurna untuk menghindari endapan"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tvNomor3"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/tvNomor4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeader3"
+                    android:layout_marginStart="16dp"
+                    android:text="4."
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvHeader4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/tvNomor4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Setelah bahan utama terlarut, tambahkan mikronutrien dengan konsentrasi sesuai rekomendasi dan aduk rata"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tvNomor4"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/abmix"
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/abmix"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeader4"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -15,7 +15,8 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class MainViewModel(
-    private val repository: MainRepository,
+    private val repository: MainRepository
+
 ): ViewModel() {
     var croppedImageUri: Uri? = null
     var currentImageUri: Uri? = null
@@ -38,6 +39,4 @@ class MainViewModel(
             }
         }
     }
-
-    fun getAllTutor(): LiveData<List<TutorialEntity>> = repository.getAllTutor()
 }

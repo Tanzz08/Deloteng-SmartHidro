@@ -9,7 +9,9 @@ import com.example.delotengsmarthidro.data.database.TutorialEntity
 import com.example.delotengsmarthidro.data.response.ListItem
 import com.example.delotengsmarthidro.databinding.ItemTutorialBinding
 
-class TutorListAdapter :  ListAdapter<TutorialEntity, TutorListAdapter.StepViewHolder>(DIFF_CALLBACK) {
+class TutorListAdapter(
+    private val onItemClick: (TutorialEntity) -> Unit
+) :  ListAdapter<TutorialEntity, TutorListAdapter.StepViewHolder>(DIFF_CALLBACK) {
 
     inner class StepViewHolder(private val binding: ItemTutorialBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -18,6 +20,10 @@ class TutorListAdapter :  ListAdapter<TutorialEntity, TutorListAdapter.StepViewH
                 tvStepTitle.text = step.title
                 tvStepDescription.text = step.desc
                 step.icon?.let { ivIcon.setImageResource(it) }
+
+                itemView.setOnClickListener{
+                    onItemClick(step)
+                }
             }
         }
     }

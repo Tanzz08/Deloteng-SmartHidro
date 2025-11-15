@@ -12,7 +12,7 @@ object DummyTipsData {
             ),
             TipsList(
                 title = "Sterilisasi Media Tanam",
-                desc = "Gunakan media bersih seperti rockwool atau cocopeat–perlite dan pastikan sudah disterilisasi untuk mencegah kontaminasi jamur dan bakteri.",
+                desc = "Gunakan media bersih seperti rockwool.jpg atau cocopeat–perlite dan pastikan sudah disterilisasi untuk mencegah kontaminasi jamur dan bakteri.",
                 icon = R.drawable.ic_tabler_seeding
             ),
             TipsList(
