@@ -31,6 +31,8 @@ import com.example.delotengsmarthidro.databinding.FragmentPanduanBinding
 import com.example.delotengsmarthidro.ui.detail.DetailActivity
 import com.example.delotengsmarthidro.ui.detail.NutrisiActivity
 import com.example.delotengsmarthidro.ui.detail.PembibitanActivity
+import com.example.delotengsmarthidro.ui.detail.PerawatanActivity
+import com.example.delotengsmarthidro.ui.detail.TransplantasiActivity
 
 class PanduanFragment : Fragment() {
 
@@ -65,6 +67,12 @@ class PanduanFragment : Fragment() {
             }
             tutor3.setOnClickListener {
                 navigateToDetail(NutrisiActivity::class.java)
+            }
+            tutor4.setOnClickListener {
+                navigateToDetail(TransplantasiActivity::class.java)
+            }
+            tutor5.setOnClickListener {
+                navigateToDetail(PerawatanActivity::class.java)
             }
         }
 

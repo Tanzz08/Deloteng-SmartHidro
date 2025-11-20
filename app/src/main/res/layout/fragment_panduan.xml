@@ -302,7 +302,7 @@
                             android:background="@drawable/bg_icon_container"
                             android:contentDescription="Ikon Langkah"
                             android:padding="12dp"
-                            android:src="@drawable/ic_truc"
+                            android:src="@drawable/nutrition"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -360,7 +360,7 @@
                             android:background="@drawable/bg_icon_container"
                             android:contentDescription="Ikon Langkah"
                             android:padding="12dp"
-                            android:src="@drawable/ic_truc"
+                            android:src="@drawable/ic_transform"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -379,6 +379,64 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/tutor5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintTop_toBottomOf="@id/tutor4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvStepTitle5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="Perawatan &amp; Pemeliharaan"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivIcon5"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView9"
+                            app:layout_constraintStart_toEndOf="@+id/ivIcon5"
+                            app:layout_constraintTop_toTopOf="@+id/ivIcon5" />
+
+                        <ImageView
+                            android:id="@+id/ivIcon5"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/bg_icon_container"
+                            android:contentDescription="Ikon Langkah"
+                            android:padding="12dp"
+                            android:src="@drawable/maintenance2"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#388E3C" />
+
+                        <ImageView
+                            android:id="@+id/imageView9"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_right_arrow"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvStepTitle5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tvStepTitle5" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
                 <TextView
                     android:id="@+id/header_vid"
                     android:layout_width="0dp"
@@ -389,7 +447,7 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@+id/tutor4"
+                    app:layout_constraintTop_toBottomOf="@+id/tutor5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 

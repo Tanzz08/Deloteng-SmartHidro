@@ -118,7 +118,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="Langkah-langkah Formula Nutrisi"
+                    android:text="Langkah Membuat Larutan Stok AB Mix"
                     android:textColor="@color/color_label"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@+id/tvNomor"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Pastikan setiap bahan ditimbang sesuai dengan kebutuhan konsentrasi larutan"
+                    android:text="Siapkan DUA wadah terpisah, beri label 'Stok A' dan 'Stok B'. PENTING: Keduanya tidak boleh dicampur."
                     android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="@id/tvNomor"
                     android:layout_marginStart="8dp"
@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@+id/tvNomor2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Larutkan bahan satu per satu dalam air bersih"
+                    android:text="Untuk STOK A: Masukkan semua bubuk Paket A ke wadah A. Tambahkan air 500ml (sesuai takran yang ada pada kemasan), aduk/kocok hingga larut sempurna."
                     android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="@id/tvNomor2"
                     android:layout_marginStart="8dp"
@@ -200,7 +200,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@+id/tvNomor3"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Pastikan larutan diaduk terus menerus hingga semua bahan terlarut sempurna untuk menghindari endapan"
+                    android:text="Untuk STOK B: Masukkan semua bubuk Paket B ke wadah B. Ulangi proses yang sama (tambah air, aduk/kocok). Gunakan pengaduk terpisah."
                     android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="@id/tvNomor3"
                     android:layout_marginStart="8dp"
@@ -227,7 +227,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@+id/tvNomor4"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Setelah bahan utama terlarut, tambahkan mikronutrien dengan konsentrasi sesuai rekomendasi dan aduk rata"
+                    android:text="Cara Pakai (misal 1 Liter Air Baku): Tuang 5ml Stok A, aduk rata. BARU tuang 5ml Stok B, aduk rata. Larutan siap digunakan. (Dosis 5ml adalah contoh, ikuti anjuran kemasan)."
                     android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="@id/tvNomor4"
                     android:layout_marginStart="8dp"
@@ -246,6 +246,33 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvHeader4"/>
+
+                <TextView
+                    android:id="@+id/tvTutor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/abmix"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Video Tutorial"
+                    android:textColor="@color/color_label"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <androidx.media3.ui.PlayerView
+                    android:id="@+id/frame_vid"
+                    android:layout_width="0dp"
+                    android:layout_height="500dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@color/black"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTutor"/>
 
 
 

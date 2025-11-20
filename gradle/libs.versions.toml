@@ -20,6 +20,7 @@ tensorflowLite = "0.4.4"
 ucrop = "2.2.8"
 playServicesLocation = "21.3.0"
 playServicesMaps = "19.0.0"
+shimmer = "0.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -67,6 +68,9 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+
 
 
 [plugins]

@@ -13,17 +13,6 @@
         android:layout_height="wrap_content"
         tools:context=".ui.home.HomeFragment">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
@@ -47,6 +36,36 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_cuaca" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/progress_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:shimmer_auto_start="true"
+            app:layout_constraintBottom_toTopOf="@+id/sectionMain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" >
+            
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp">
+
+                    <include layout="@layout/list_cuaca_placeholder" />
+                    <include layout="@layout/list_cuaca_placeholder" />
+                    <include layout="@layout/list_cuaca_placeholder" />
+                    <include layout="@layout/list_cuaca_placeholder" />
+                </LinearLayout>
+
+
+            </ScrollView>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
 
         <TextView
             android:id="@+id/tvDate"
@@ -83,7 +102,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/progress_bar"
             app:layout_constraintStart_toStartOf="@+id/recyclerView" />
 
 

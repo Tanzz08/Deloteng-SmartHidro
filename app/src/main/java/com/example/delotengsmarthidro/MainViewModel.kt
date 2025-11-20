@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.delotengsmarthidro.data.database.HistoryEntity
 import com.example.delotengsmarthidro.data.database.TutorialEntity
 import com.example.delotengsmarthidro.data.repository.MainRepository
 import com.example.delotengsmarthidro.data.response.WeatherResponse
@@ -24,7 +25,19 @@ class MainViewModel(
     private val _weatherResult = MutableLiveData<ResultState<WeatherResponse>>()
     val weatherResult: LiveData<ResultState<WeatherResponse>> = _weatherResult
 
+    fun insertHistory(history: HistoryEntity) {
+        viewModelScope.launch {
+            repository.insert(history)
+        }
+    }
+
+    val allHistory: LiveData<List<HistoryEntity>> = repository.getAllHistory()
+
     fun getWeatherData() {
+        if (_weatherResult.value != null) {
+            return
+        }
+
         viewModelScope.launch {
             _weatherResult.value = ResultState.Loading
             try {

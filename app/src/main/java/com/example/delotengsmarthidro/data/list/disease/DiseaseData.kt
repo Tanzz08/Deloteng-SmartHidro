@@ -111,6 +111,10 @@ object DiseaseData {
     )
 
     fun findByLabel(label: String): Disease? {
-        return diseaseList.find { it.modelKey.equals(label, ignoreCase = true) }
+        val cleanLabel = label.trim()
+
+        return diseaseList.find {
+            it.modelKey.trim().equals(cleanLabel, ignoreCase = true)
+        }
     }
 }

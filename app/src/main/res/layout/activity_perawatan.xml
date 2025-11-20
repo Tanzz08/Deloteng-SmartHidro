@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backhround"
+    tools:context=".ui.detail.PerawatanActivity"> <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="?attr/actionBarSize">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:contentInsetStart="0dp"
+            app:navigationIconTint="@color/white">
+
+            <FrameLayout
+                android:id="@+id/frameAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/btn_back"
+                    android:src="@drawable/ic_arrow_back" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginEnd="34dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Perawatan &amp; Pemeliharaan"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
+
+            </FrameLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:id="@+id/shadow_view"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@drawable/shadow"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingBottom="16dp"
+        android:background="@drawable/corner_radius_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shadow_view"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvJudulNutrisi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Manajemen Nutrisi"
+                android:textColor="@color/color_label"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/tvHeaderNutrisi1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Pengecekan Air, PPM, dan pH"
+                app:layout_constraintTop_toBottomOf="@id/tvJudulNutrisi"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvTextNutrisi1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvHeaderNutrisi1"
+                app:layout_constraintEnd_toEndOf="@id/tvHeaderNutrisi1"
+                app:layout_constraintTop_toBottomOf="@id/tvHeaderNutrisi1"
+                android:text="Selalu cek ketinggian air di bak. Gunakan TDS meter untuk jaga PPM (600-1000 untuk selada) dan pH meter untuk jaga pH (5.5 - 6.5)."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_color"/>
+
+            <TextView
+                android:id="@+id/tvHeaderNutrisi2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Penggantian Air Nutrisi"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tvTextNutrisi1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvTextNutrisi2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvHeaderNutrisi2"
+                app:layout_constraintEnd_toEndOf="@id/tvHeaderNutrisi2"
+                app:layout_constraintTop_toBottomOf="@id/tvHeaderNutrisi2"
+                android:text="Ganti total air nutrisi setiap 1-2 minggu sekali untuk mencegah penumpukan jamur dan garam mineral."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_color"/>
+
+            <TextView
+                android:id="@+id/tvJudulKesehatan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Pemantauan Kesehatan"
+                android:textColor="@color/color_label"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTextNutrisi2" />
+
+            <TextView
+                android:id="@+id/tvHeaderKesehatan1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Periksa Daun dan Akar"
+                app:layout_constraintTop_toBottomOf="@id/tvJudulKesehatan"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvTextKesehatan1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvHeaderKesehatan1"
+                app:layout_constraintEnd_toEndOf="@id/tvHeaderKesehatan1"
+                app:layout_constraintTop_toBottomOf="@id/tvHeaderKesehatan1"
+                android:text="Cek daun dari hama, bercak, atau warna kuning. Cek akar, pastikan warnanya putih bersih, bukan cokelat dan berlendir (busuk akar). Gunakan fitur diganosa penyakit pada menu Diagnosa untuk mendeteksi penyakit pada daun tanaman."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_color"/>
+
+            <TextView
+                android:id="@+id/tvJudulLingkungan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Pengendalian Lingkungan"
+                android:textColor="@color/color_label"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTextKesehatan1" />
+
+            <TextView
+                android:id="@+id/tvHeaderLingkungan1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Cahaya, Suhu, dan Sirkulasi"
+                app:layout_constraintTop_toBottomOf="@id/tvJudulLingkungan"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvTextLingkungan1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvHeaderLingkungan1"
+                app:layout_constraintEnd_toEndOf="@id/tvHeaderLingkungan1"
+                app:layout_constraintTop_toBottomOf="@id/tvHeaderLingkungan1"
+                android:text="Pastikan tanaman mendapat sinar matahari minimal 6 jam, atau 12-16 jam jika menggunakan grow light. Jaga sirkulasi udara tetap baik untuk mencegah jamur."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_color"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

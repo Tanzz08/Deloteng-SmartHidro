@@ -95,4 +95,7 @@ dependencies {
     // library google play service location
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
+
+    // shimmer
+    implementation(libs.shimmer)
 }

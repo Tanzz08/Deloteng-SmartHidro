@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.delotengsmarthidro.data.repository.MainRepository
+import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = [HistoryEntity::class], version = 1, exportSchema = false)
 abstract class HistoryDatabase : RoomDatabase() {
@@ -15,7 +16,7 @@ abstract class HistoryDatabase : RoomDatabase() {
         private var INSTANCE: HistoryDatabase? = null
 
         @JvmStatic
-        fun getDatabase(context: Context): HistoryDatabase {
+        fun getDatabase(context: Context, applicationScope: CoroutineScope): HistoryDatabase {
             if (INSTANCE == null){
                 synchronized(MainRepository::class.java){
                     INSTANCE = Room.databaseBuilder(context.applicationContext,

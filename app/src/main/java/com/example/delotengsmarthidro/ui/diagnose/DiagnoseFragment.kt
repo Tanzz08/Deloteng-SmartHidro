@@ -2,8 +2,8 @@ package com.example.delotengsmarthidro.ui.diagnose
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -15,17 +15,23 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.asclepius.viewmodel.ViewModelFactory
 import com.example.delotengsmarthidro.MainViewModel
 import com.example.delotengsmarthidro.ResultActivity
+import com.example.delotengsmarthidro.adapter.HistoryAdapter
+import com.example.delotengsmarthidro.data.DiseaseData
+import com.example.delotengsmarthidro.data.database.HistoryEntity
 import com.example.delotengsmarthidro.data.di.Injection
 import com.example.delotengsmarthidro.databinding.FragmentDiagnoseBinding
 import com.example.delotengsmarthidro.helper.ImageClassifierHelper
+import com.example.delotengsmarthidro.ui.detail.HistoryDetailActivity
 import com.yalantis.ucrop.UCrop
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import java.io.File
-import java.text.NumberFormat
+import java.io.FileOutputStream
 
 class DiagnoseFragment : Fragment() {
 
@@ -34,7 +40,7 @@ class DiagnoseFragment : Fragment() {
 
     private lateinit var imageClassifierHelper: ImageClassifierHelper
     private lateinit var viewModel: MainViewModel
-//    private var currentImageUri: Uri? = null
+    private lateinit var adapter: HistoryAdapter
 
 
     override fun onCreateView(
@@ -55,6 +61,16 @@ class DiagnoseFragment : Fragment() {
 
         showImage()
 
+        adapter = HistoryAdapter { history ->
+            val intent = Intent(requireActivity(), HistoryDetailActivity::class.java)
+            intent.putExtra(HistoryDetailActivity.EXTRA_HISTORY, history)
+            startActivity(intent)
+        }
+
+        viewModel.allHistory.observe(viewLifecycleOwner) { historyList ->
+            adapter.submitList(historyList)
+        }
+
         binding.apply {
             btnUploadImage.setOnClickListener{
                 startGallery()
@@ -71,20 +87,65 @@ class DiagnoseFragment : Fragment() {
                 classifierListener = object : ImageClassifierHelper.ClassifierListener {
                     override fun onError(error: String) {
                         activity?.runOnUiThread {
-                            progressIndicator.visibility = View.GONE
+                            binding.progressIndicator.visibility = View.GONE
                             showToast(error)
+                            setUiInteraction(true)
                         }
                     }
 
                     override fun onResults(results: List<Classifications>?) {
                         binding.progressIndicator.visibility = View.GONE
-                        results?.let { it ->
+                        setUiInteraction(true)
+
+                        val currentImageUri = viewModel.croppedImageUri // Ini URI cache sementara
+
+                        if (currentImageUri == null) {
+                            Log.e("DiagnoseFragment", "Image URI null when onResults returned.")
+                            showToast("Gagal menyimpan riwayat, URI tidak ditemukan.")
+                            return
+                        }
+
+                        // **PERUBAHAN KUNCI 1: SALIN GAMBAR KE FILE PERMANEN**
+                        val permanentImageUri = saveImageToInternalStorage(requireContext(), currentImageUri)
+                        if (permanentImageUri == null) {
+                            Log.e("DiagnoseFragment", "Failed to save image to internal storage.")
+                            showToast("Gagal menyimpan gambar riwayat.")
+                            return
+                        }
+                        // **SELESAI**
+
+                        results?.let {
                             if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
                                 Log.d("Classification Result", it.toString())
 
                                 val label = it[0].categories[0].label
+                                val disease = DiseaseData.findByLabel(label)
 
-                                moveToResult(label)
+                                // **PERUBAHAN KUNCI 2: GUNAKAN URI PERMANEN**
+                                val imageUriString = permanentImageUri.toString()
+                                val timestamp = System.currentTimeMillis()
+                                var treatmentString: String? = null
+                                var ciriCiriString: String? = null
+
+                                disease?.let { d ->
+                                    ciriCiriString = d.characteristics.joinToString("\n")
+                                    treatmentString = d.solution.joinToString("\n")
+                                        .replace("<b>", "")
+                                        .replace("</b>", "")
+                                }
+
+                                val history = HistoryEntity(
+                                    imageUri = imageUriString, // <-- Simpan URI permanen
+                                    label = disease?.displayName ?: label,
+                                    timestamp = timestamp,
+                                    treatment = treatmentString,
+                                    ciriCiri = ciriCiriString
+                                )
+
+                                viewModel.insertHistory(history)
+
+                                // Kirim URI permanen ke ResultActivity
+                                moveToResult(label, imageUriString)
                             } else {
                                 showToast("Tidak dapat menemukan hasil")
                             }
@@ -93,7 +154,51 @@ class DiagnoseFragment : Fragment() {
 
                 }
             )
+
+            rvHistory.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            rvHistory.adapter = adapter
+
         }
+    }
+
+    // **FUNGSI BARU UNTUK MENYIMPAN GAMBAR**
+    private fun saveImageToInternalStorage(context: Context, uri: Uri): Uri? {
+        // Gunakan 'safe' context
+        val appContext = context.applicationContext ?: return null
+        val contentResolver = appContext.contentResolver
+        val inputStream = contentResolver.openInputStream(uri) ?: return null
+
+        // Buat direktori jika belum ada
+        val directory = File(appContext.filesDir, "history_images")
+        if (!directory.exists()) {
+            directory.mkdirs()
+        }
+
+        // Buat file tujuan yang unik
+        val file = File(directory, "IMG_${System.currentTimeMillis()}.jpg")
+
+        // Salin file
+        try {
+            val outputStream = FileOutputStream(file)
+            inputStream.use { input ->
+                outputStream.use { output ->
+                    input.copyTo(output)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("SaveImage", "Error copying file", e)
+            return null
+        }
+
+        // Kembalikan URI dari file yang BARU
+        return file.toUri()
+    }
+    // **AKHIR FUNGSI BARU**
+
+    private fun setUiInteraction(isEnabled: Boolean) {
+        binding.btnUploadImage.isEnabled = isEnabled
+        binding.btnAmbilGambar.isEnabled = isEnabled
+        binding.btnDiagnose.isEnabled = isEnabled
     }
 
     // mendapatkan hasil uCrop
@@ -106,6 +211,7 @@ class DiagnoseFragment : Fragment() {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            // Ini tetap URI cache sementara, tidak apa-apa
             viewModel.croppedImageUri = UCrop.getOutput(data!!)
             showImage()
             binding.btnDiagnose.isEnabled = true
@@ -119,6 +225,7 @@ class DiagnoseFragment : Fragment() {
     }
 
     private fun startCrop(uri: Uri) {
+        // Ini adalah file cache sementara, ini sudah benar
         val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "cropped_image.jpg"))
         UCrop.of(uri, destinationUri)
             .withAspectRatio(1f, 1f)
@@ -161,7 +268,7 @@ class DiagnoseFragment : Fragment() {
             file
         )
 
-        // Pastikan launcherIntentCamera sudah didefinisikan
+        // Pastikan launcherIntentCamera sudah didefinikan
         launcherIntentCamera.launch(viewModel.currentImageUri!!)
     }
 
@@ -177,19 +284,24 @@ class DiagnoseFragment : Fragment() {
         }
     }
 
-    // BENAR: Menganalisis gambar yang sudah di-crop
+    // Mengunci UI saat diagnosis dimulai
     private fun analyzeImage() {
         binding.progressIndicator.visibility = View.VISIBLE
+        setUiInteraction(false) // KUNCI UI DI SINI
 
-        // Gunakan URI yang sudah di-crop
         viewModel.croppedImageUri?.let { uri ->
             imageClassifierHelper.classifyStaticImage(uri)
-        } ?: showToast("Silakan masukkan berkas gambar terlebih dahulu.")
+        } ?: run {
+            showToast("Silakan masukkan berkas gambar terlebih dahulu.")
+            binding.progressIndicator.visibility = View.GONE
+            setUiInteraction(true) // BUKA KUNCI UI JIKA GAGAL
+        }
     }
 
-    private fun moveToResult(result: String) {
+    // Ubah parameter fungsi ini
+    private fun moveToResult(result: String, imageUriString: String) {
         val intent = Intent(requireActivity(), ResultActivity::class.java)
-        intent.putExtra(ResultActivity.EXTRA_IMAGE_URI, viewModel.croppedImageUri.toString())
+        intent.putExtra(ResultActivity.EXTRA_IMAGE_URI, imageUriString) // Gunakan parameter
         intent.putExtra(ResultActivity.EXTRA_RESULT, result)
         startActivity(intent)
     }
@@ -200,14 +312,6 @@ class DiagnoseFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // 1. Ini adalah solusi untuk permintaan Anda:
-        //    Membersihkan URI di ViewModel saat view dihancurkan.
-        viewModel.croppedImageUri = null
-        viewModel.currentImageUri = null // Bersihkan juga URI aslinya jika perlu
-
-        // 2. Ini adalah perbaikan penting untuk kode Anda:
-        //    Selalu atur _binding = null di onDestroyView()
-        //    untuk menghindari kebocoran memori (memory leaks).
         _binding = null
     }
 }
