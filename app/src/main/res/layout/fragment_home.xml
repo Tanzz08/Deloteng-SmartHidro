@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         tools:context=".ui.home.HomeFragment">
 
-
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
@@ -37,6 +36,70 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_cuaca" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:shimmer_auto_start="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="180dp"
+                    android:layout_height="20dp"
+                    android:background="@color/placeholder_white_transparent"
+                    android:layout_marginBottom="8dp"/>
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@color/placeholder_white_transparent"
+                    android:layout_marginBottom="8dp"/>
+
+                <View
+                    android:layout_width="120dp"
+                    android:layout_height="20dp"
+                    android:background="@color/placeholder_white_transparent"/>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/progress_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:shimmer_auto_start="true"
+            app:layout_constraintBottom_toTopOf="@+id/sectionMain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" >
+            
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp">
+
+                    <include layout="@layout/list_cuaca_placeholder" />
+                    <include layout="@layout/list_cuaca_placeholder" />
+                    <include layout="@layout/list_cuaca_placeholder" />
+                    <include layout="@layout/list_cuaca_placeholder" />
+                </LinearLayout>
+
+
+            </ScrollView>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
 
         <TextView
             android:id="@+id/tvDate"
@@ -149,9 +212,10 @@
                             android:drawableEnd="@drawable/baseline_arrow_forward_24"
                             android:paddingStart="30dp"
                             android:paddingEnd="30dp"
-                            android:text="@string/ayo_mulai"
+                            android:text="Lihat Panduan Tanaman"
+                            android:textStyle="bold"
                             android:textAllCaps="false"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="@+id/desc1"
                             app:layout_constraintStart_toStartOf="@+id/desc1"
                             app:layout_constraintTop_toBottomOf="@+id/desc1" />
@@ -234,7 +298,8 @@
                             android:paddingEnd="30dp"
                             android:text="@string/mulai_diagnosa"
                             android:textAllCaps="false"
-                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="@+id/desc2"
                             app:layout_constraintStart_toStartOf="@+id/desc2"
                             app:layout_constraintTop_toBottomOf="@+id/desc2" />

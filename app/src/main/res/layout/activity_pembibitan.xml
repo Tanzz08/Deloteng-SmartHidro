@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.PembibitanActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.home.HomeFragment"
+        android:background="@color/backhround"
+        android:paddingBottom="?attr/actionBarSize">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIconTint="@color/white">
+
+                <FrameLayout
+                    android:id="@+id/frameAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical">
+
+                    <ImageButton
+                        android:id="@+id/btnBack"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/btn_back"
+                        android:padding="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_arrow_back"
+                        app:shapeAppearanceOverlay="@style/imageViewCircle" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="36dp"
+                        android:layout_marginEnd="34dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Pembibitan"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="18sp" />
+
+                </FrameLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <View
+            android:id="@+id/shadow_view"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/shadow"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingBottom="16dp"
+            android:background="@drawable/corner_radius_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shadow_view"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvBahan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Tahap Penyemaian"
+                    android:textColor="@color/color_label"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp" />
+
+                <TextView
+                    android:id="@+id/tvNomor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvBahan"
+                    android:layout_marginStart="16dp"
+                    android:text="1."
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/tvNomor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Potong rockwool / busa ukuran 2cm x 2cm, lubangi bagian atasnya, kemudian selupkan ke dalam air sampai basah. Susun di tray dengan rapi"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tvNomor"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/rockwool"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/satu"
+                    app:layout_constraintEnd_toEndOf="@+id/tvHeader"
+                    app:layout_constraintStart_toStartOf="@+id/tvNomor"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeader" />
+
+                <TextView
+                    android:id="@+id/tvNomor2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rockwool"
+                    android:layout_marginStart="16dp"
+                    android:text="2."
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"/>
+
+
+                <TextView
+                    android:id="@+id/tvHeader2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/tvNomor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Masukkan biji sayuran ke dalam lubang, kemudian disemprot dengan air kembali sampai basah. Letakkan tray di tempat yang teduh namun masih terkena matahari secara tidak langsung"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tvNomor2"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/tanam"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dua"
+                    app:layout_constraintEnd_toEndOf="@+id/tvHeader2"
+                    app:layout_constraintStart_toStartOf="@+id/tvNomor2"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeader2" />
+
+                <TextView
+                    android:id="@+id/tvNomor3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tanam"
+                    android:layout_marginStart="16dp"
+                    android:text="3."
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tvHeader3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/tvNomor2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Jaga kelembapan benih setiap hari, jika terlalu kering dapat disemprot dengan air. Dalam 2 x 24 jam benih sudah tumbuh. Biarkan sampai 2 minggu di tempat pembibitan"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tvNomor3"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/jaga"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/tiga"
+                    app:layout_constraintEnd_toEndOf="@+id/tvHeader3"
+                    app:layout_constraintStart_toStartOf="@+id/tvNomor3"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeader3" />
+
+                <ImageView
+                    android:id="@+id/tiga"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/empat"
+                    app:layout_constraintEnd_toEndOf="@+id/jaga"
+                    app:layout_constraintStart_toStartOf="@+id/jaga"
+                    app:layout_constraintTop_toBottomOf="@id/jaga" />
+
+                <TextView
+                    android:id="@+id/tvTutor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tiga"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Video Tutorial"
+                    android:textColor="@color/color_label"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <androidx.media3.ui.PlayerView
+                    android:id="@+id/frame_vid"
+                    android:layout_width="0dp"
+                    android:layout_height="500dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@color/black"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTutor"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,12 +1,10 @@
 package com.example.delotengsmarthidro.data.remote
 
 import com.yalantis.ucrop.BuildConfig
-import com.yalantis.ucrop.OkHttpClientStore
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.math.log
 
 object ApiConfig {
     fun getWeather(): ApiService {

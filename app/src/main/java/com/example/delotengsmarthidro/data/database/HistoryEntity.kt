@@ -28,3 +28,4 @@ data class HistoryEntity (
     @ColumnInfo(name = "ciriCiri")
     var ciriCiri: String? = null,
 ) : Parcelable
+

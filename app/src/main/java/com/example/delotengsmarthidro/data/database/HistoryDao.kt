@@ -10,15 +10,13 @@ import androidx.room.Update
 
 @Dao
 interface HistoryDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(historyEntity: HistoryEntity )
-
-    @Update
-    fun update(historyEntity: HistoryEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+     fun insert(historyEntity: HistoryEntity)
 
     @Delete
     fun delete(historyEntity: HistoryEntity)
 
     @Query("SELECT * from history_table ORDER BY timestamp DESC")
     fun getAllHistory(): LiveData<List<HistoryEntity>>
+
 }

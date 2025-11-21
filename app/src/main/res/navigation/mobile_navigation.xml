@@ -9,13 +9,22 @@
         android:id="@+id/navigation_home"
         android:name="com.example.delotengsmarthidro.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_panduan"
+            app:destination="@id/navigation_panduan" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_diagnose"
+            app:destination="@id/navigation_diagnose" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_panduan"
         android:name="com.example.delotengsmarthidro.ui.panduan.PanduanFragment"
         android:label="@string/title_panduan"
-        tools:layout="@layout/fragment_panduan" />
+        tools:layout="@layout/fragment_panduan" >
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_diagnose"

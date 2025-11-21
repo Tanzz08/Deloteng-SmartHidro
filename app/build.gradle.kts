@@ -19,6 +19,10 @@ android {
 
         buildConfigField("String", "API_KEY", "\"a1d91f746849c525b26c14cf44cd7a6f\"")
 
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
+
     }
 
     buildTypes {
@@ -77,6 +81,8 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
+    implementation(libs.room.ktx)
+
 
     // uCrop
     implementation(libs.ucrop)
@@ -89,4 +95,10 @@ dependencies {
     // library google play service location
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
+
+    // shimmer
+    implementation(libs.shimmer)
+
+    // datastore
+    implementation(libs.androidx.datastore.preferences)
 }

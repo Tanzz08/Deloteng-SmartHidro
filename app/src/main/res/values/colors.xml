@@ -16,6 +16,9 @@
     <color name="color_diagnose_container">#F6EACD</color>
     <color name="color_teal_buram">#EEFDF3</color>
     <color name="color_label">#15803D</color>
+    <color name="placeholder_white_transparent">#80FFFFFF</color>
+    <color name="color_primary">#F4E5C2</color>
+
 
 
 </resources>
