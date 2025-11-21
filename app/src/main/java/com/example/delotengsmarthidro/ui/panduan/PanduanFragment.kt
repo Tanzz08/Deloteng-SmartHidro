@@ -38,12 +38,6 @@ class PanduanFragment : Fragment() {
 
     private var _binding: FragmentPanduanBinding? = null
     private val binding get() = _binding!!
-    private var player:ExoPlayer? = null
-
-    private val mainViewModel: MainViewModel by viewModels {
-        val repository = (requireActivity().application as MyApplication).repository
-        ViewModelFactory.getInstance(repository)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,8 +73,6 @@ class PanduanFragment : Fragment() {
         val tipsData = DummyTipsData.getTipsSolution()
         val tipsAdapter = TipsListAdapter(tipsData)
         setupRecyclerView(binding.rvTips, tipsAdapter)
-
-        initializePlayer()
     }
 
     private fun navigateToDetail(destinationActivity: Class<*>) {
@@ -94,33 +86,8 @@ class PanduanFragment : Fragment() {
         recyclerView.isNestedScrollingEnabled = false
     }
 
-    private fun initializePlayer() {
-        val uri = Uri.parse("android.resource://${requireActivity().packageName}/${R.raw.vid_tutor}")
-        player = ExoPlayer.Builder(requireContext()).build().apply {
-            setMediaItem(MediaItem.fromUri(uri))
-            prepare()
-        }
-        binding.apply {
-            frameVid.player = player
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        player?.pause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        player?.release()
-        player = null
-    }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
-        player?.release()
-        player = null
         _binding = null
     }
 }

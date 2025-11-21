@@ -114,6 +114,7 @@
 
                 <ImageView
                     android:id="@+id/hero"
+                    android:transitionName="hero"
                     android:layout_width="0dp"
                     android:layout_height="232dp"
                     android:layout_marginStart="16dp"
@@ -177,6 +178,7 @@
 
                     <TextView
                         android:id="@id/tvLabel"
+                        android:transitionName="label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         tools:text="Bacterial Spot"
@@ -195,6 +197,7 @@
 
                     <TextView
                         android:id="@+id/tvCiri"
+                        android:transitionName="charateristic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -212,6 +215,7 @@
 
                     <TextView
                         android:id="@+id/tvSolution"
+                        android:transitionName="solution"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

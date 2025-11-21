@@ -6,9 +6,7 @@ import android.text.Html
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.delotengsmarthidro.data.DiseaseData
+import com.example.delotengsmarthidro.data.list.disease.DiseaseData
 import com.example.delotengsmarthidro.databinding.ActivityResultBinding
 
 class ResultActivity : AppCompatActivity() {

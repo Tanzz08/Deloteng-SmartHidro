@@ -22,7 +22,7 @@ import com.dicoding.asclepius.viewmodel.ViewModelFactory
 import com.example.delotengsmarthidro.MainViewModel
 import com.example.delotengsmarthidro.ResultActivity
 import com.example.delotengsmarthidro.adapter.HistoryAdapter
-import com.example.delotengsmarthidro.data.DiseaseData
+import com.example.delotengsmarthidro.data.list.disease.DiseaseData
 import com.example.delotengsmarthidro.data.database.HistoryEntity
 import com.example.delotengsmarthidro.data.di.Injection
 import com.example.delotengsmarthidro.databinding.FragmentDiagnoseBinding
@@ -47,9 +47,8 @@ class DiagnoseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val repository = Injection.provideMainRepository(requireContext())
-        val factory = ViewModelFactory.getInstance(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(MainViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(requireActivity().application)
+        viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
 
         _binding = FragmentDiagnoseBinding.inflate(inflater, container, false)
         val root: View = binding.root

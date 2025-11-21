@@ -98,4 +98,7 @@ dependencies {
 
     // shimmer
     implementation(libs.shimmer)
+
+    // datastore
+    implementation(libs.androidx.datastore.preferences)
 }

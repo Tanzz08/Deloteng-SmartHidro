@@ -2,7 +2,6 @@ package com.example.delotengsmarthidro.ui.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -15,19 +14,21 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-// import com.bumptech.glide.Glide // Kita tidak butuh Glide untuk UI utama
 import com.dicoding.asclepius.viewmodel.ViewModelFactory
 import com.example.delotengsmarthidro.MainViewModel
-import com.example.delotengsmarthidro.ResultActivity
+import com.example.delotengsmarthidro.R
 import com.example.delotengsmarthidro.adapter.WeatherAdapter
 import com.example.delotengsmarthidro.data.di.Injection
 import com.example.delotengsmarthidro.data.response.WeatherResponse
 import com.example.delotengsmarthidro.databinding.FragmentHomeBinding
 import com.example.delotengsmarthidro.utils.ResultState
-import com.example.delotengsmarthidro.utils.formDate // Pastikan util ini ada
+import com.example.delotengsmarthidro.utils.formDate
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -43,7 +44,6 @@ class HomeFragment : Fragment() {
     private lateinit var weatherAdapter: WeatherAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    // (Launcher izin tetap sama)
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -70,16 +70,27 @@ class HomeFragment : Fragment() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        val repository = Injection.provideMainRepository(requireContext())
-        val factory = ViewModelFactory.getInstance(repository)
+        val factory = ViewModelFactory.getInstance(requireActivity().application)
+        viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
         viewModel = ViewModelProvider(requireActivity(), factory).get(MainViewModel::class.java)
+
+        binding.apply {
+            btnDiagnose.setOnClickListener {
+                val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
+                bottomNav.selectedItemId = R.id.navigation_diagnose
+            }
+
+            btnAyoMulai.setOnClickListener {
+                val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
+                bottomNav.selectedItemId = R.id.navigation_panduan
+            }
+        }
 
         setupRecyclerView()
         observerWeather()
         requestWeatherByLocation()
     } 
 
-    // (Fungsi requestWeatherByLocation dan isLocationPermissionGranted tetap sama)
     private fun requestWeatherByLocation() {
         if (isLocationPermissionGranted()) {
             viewModel.getWeatherData()
@@ -118,16 +129,32 @@ class HomeFragment : Fragment() {
             when (result) {
                 is ResultState.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.startShimmer()
+
+                    binding.shimmerHeader.visibility = View.VISIBLE
+                    binding.shimmerHeader.startShimmer()
+
+                    binding.tvDate.visibility = View.INVISIBLE
+                    binding.tvTemp.visibility = View.INVISIBLE
+                    binding.tvCuaca.visibility = View.INVISIBLE
+                    binding.recyclerView.visibility = View.INVISIBLE
+
                 }
                 is ResultState.Success -> {
+                    binding.shimmerHeader.stopShimmer()
+                    binding.shimmerHeader.visibility = View.GONE
+
+                    binding.progressBar.stopShimmer()
                     binding.progressBar.visibility = View.GONE
 
+                    binding.tvDate.visibility = View.VISIBLE
+                    binding.tvTemp.visibility = View.VISIBLE
+                    binding.tvCuaca.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.VISIBLE
+
                     val weatherResponse = result.data
+                    updateCurrentWeatherUI(weatherResponse)
 
-                    // Panggil fungsi untuk update UI cuaca saat ini
-                    updateCurrentWeatherUI(weatherResponse) // <-- PERUBAHAN DI SINI
-
-                    // Filter 5 hari untuk RecyclerView
                     val dailyForecastIndices = listOf(0, 8, 16, 24, 32)
                     val dailyList = weatherResponse.list.filterIndexed { index, _ ->
                         index in dailyForecastIndices
@@ -142,7 +169,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    // --- FUNGSI INI SUDAH DISESUAIKAN DENGAN XML ANDA ---
     @SuppressLint("SetTextI18n", "DefaultLocale")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun updateCurrentWeatherUI(weather: WeatherResponse) {
@@ -157,24 +183,33 @@ class HomeFragment : Fragment() {
         }
 
         matchWeather?.let { forecast ->
-            // Konversi Kelvin ke Celsius (WAJIB, karena API tidak 'metric')
             val tempInCelcius = forecast.main.temp - 273.15
 
-            // 1. Set Suhu (ID: tvTemp)
             binding.tvTemp.text = String.format("%.0f°C", tempInCelcius)
 
-            // 2. Set Tanggal (ID: tvDate)
             binding.tvDate.text = formDate(forecast.dtTxt)
 
-            // 3. Set Deskripsi Cuaca (ID: tvCuaca)
             if (forecast.weather.isNotEmpty()) {
                 val description = forecast.weather[0].description
-                // Mengubah "light rain" -> "Light Rain"
                 binding.tvCuaca.text = description.replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (binding.progressBar.visibility == View.VISIBLE) {
+            binding.progressBar.startShimmer()
+            binding.shimmerHeader.startShimmer()
+        }
+    }
+
+    override fun onPause() {
+        binding.progressBar.stopShimmer()
+        binding.shimmerHeader.stopShimmer()
+        super.onPause()
     }
 
 

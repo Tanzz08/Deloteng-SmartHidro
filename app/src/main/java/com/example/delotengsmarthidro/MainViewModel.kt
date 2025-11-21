@@ -1,22 +1,22 @@
 package com.example.delotengsmarthidro
 
-import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.delotengsmarthidro.data.database.HistoryEntity
-import com.example.delotengsmarthidro.data.database.TutorialEntity
 import com.example.delotengsmarthidro.data.repository.MainRepository
 import com.example.delotengsmarthidro.data.response.WeatherResponse
+import com.example.delotengsmarthidro.preference.Preference
 import com.example.delotengsmarthidro.utils.ResultState
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
 class MainViewModel(
-    private val repository: MainRepository
+    private val repository: MainRepository,
+    private val userPreference: Preference
 
 ): ViewModel() {
     var croppedImageUri: Uri? = null
@@ -52,4 +52,7 @@ class MainViewModel(
             }
         }
     }
+
+    fun getToken() = userPreference.getToken()
+
 }
