@@ -4,25 +4,23 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import com.example.delotengsmarthidro.data.database.HistoryDao
 import com.example.delotengsmarthidro.data.database.HistoryEntity
-// HAPUS import TutorDao dan TutorialEntity
-// import com.example.delotengsmarthidro.data.database.TutorDao
-// import com.example.delotengsmarthidro.data.database.TutorialEntity
 import com.example.delotengsmarthidro.data.remote.ApiService
 import com.example.delotengsmarthidro.data.response.WeatherResponse
 import com.example.delotengsmarthidro.utils.await
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class MainRepository private constructor(
     private val apiService: ApiService,
-    // HAPUS tutorDao
-    // private val tutorDao: TutorDao,
     private val historyDao: HistoryDao,
     val context: Context
 ){
@@ -31,7 +29,6 @@ class MainRepository private constructor(
     }
     private val executorsService: ExecutorService = Executors.newSingleThreadExecutor()
 
-    // Fungsi insert dan delete untuk history sudah benar
     suspend fun insert(history: HistoryEntity){
         executorsService.execute { historyDao.insert(history) }
     }
@@ -42,21 +39,27 @@ class MainRepository private constructor(
 
     fun getAllHistory(): LiveData<List<HistoryEntity>> = historyDao.getAllHistory()
 
-    // Fungsi getWeatherData sudah benar
     suspend fun getWeatherData(): WeatherResponse {
         if (ActivityCompat.checkSelfPermission(
                 context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED) {
             throw SecurityException("Izin Lokasi Tidak diberikan")
         }
-        val location = fusedLocationClient.lastLocation.await()
+
+        val cancellationTokenSource = CancellationTokenSource()
+        val location = fusedLocationClient.getCurrentLocation(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            cancellationTokenSource.token
+        ).await()
         location?.let {
             val latitude = it.latitude
             val longitude = it.longitude
+            Log.d("MainRepository", "Akurasi Lokasi: ${it.accuracy} meter")
+            Log.d("MainRepository", "Latitude: $latitude, Longitude: $longitude")
 
             return apiService.getWeatherData(
                 lat = latitude,
@@ -66,17 +69,12 @@ class MainRepository private constructor(
         } ?: throw Exception("Lokasi tidak ditemukan")
     }
 
-    // HAPUS fungsi yang menggunakan tutorDao
-    // fun getAllTutor(): LiveData<List<TutorialEntity>> = tutorDao.getAllTutorial()
-
     companion object {
         @SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: MainRepository? = null
-        // HAPUS tutorDao dari parameter
         fun getInstance(apiService: ApiService, context: Context, historyDao: HistoryDao) =
             instance ?: synchronized(this) {
-                // HAPUS tutorDao dari panggilan constructor
                 instance ?: MainRepository(apiService, historyDao, context)
             }.also { instance = it }
     }

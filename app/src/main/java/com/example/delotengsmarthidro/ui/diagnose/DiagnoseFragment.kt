@@ -146,7 +146,7 @@ class DiagnoseFragment : Fragment() {
                                 // Kirim URI permanen ke ResultActivity
                                 moveToResult(label, imageUriString)
                             } else {
-                                showToast("Tidak dapat menemukan hasil")
+                                showToast("Pastikan Foto Daun Terlihat Jelas")
                             }
                         }
                     }
