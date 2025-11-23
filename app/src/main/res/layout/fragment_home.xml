@@ -28,7 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="4dp"
             android:scrollbars="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/sectionMain"
             app:layout_constraintRight_toRightOf="parent"
@@ -106,21 +105,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="Sabtu, 01 November 2025"
+            android:layout_marginTop="?attr/actionBarSize"
+            tools:text="Sabtu, 01 November 2025"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Sabtu, 01 November 2025" />
-
+            app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             android:id="@+id/tvTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/suhu"
+            tools:text="@string/suhu"
             android:textColor="@color/white"
             android:textSize="32sp"
             android:textStyle="bold"
@@ -132,11 +129,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Cuaca"
+            tools:text="Cuaca"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintTop_toBottomOf="@id/tvTemp"
             app:layout_constraintStart_toStartOf="@+id/recyclerView" />
 
 
@@ -213,6 +210,7 @@
                             android:paddingStart="30dp"
                             android:paddingEnd="30dp"
                             android:text="Lihat Panduan Tanaman"
+                            android:textColor="@color/white"
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:textSize="16sp"
@@ -297,6 +295,7 @@
                             android:paddingStart="30dp"
                             android:paddingEnd="30dp"
                             android:text="@string/mulai_diagnosa"
+                            android:textColor="@color/white"
                             android:textAllCaps="false"
                             android:textStyle="bold"
                             android:textSize="16sp"
