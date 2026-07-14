@@ -19,6 +19,10 @@
     <color name="placeholder_white_transparent">#80FFFFFF</color>
     <color name="color_primary">#F4E5C2</color>
 
+    <color name="color_blue">#03A9F4</color>
+
+
+
 
 
 </resources>

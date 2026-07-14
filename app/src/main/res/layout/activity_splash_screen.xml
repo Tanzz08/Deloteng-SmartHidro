@@ -23,9 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Deloteng SmartHidro"
+        android:text="Lettuce SmartHidro"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/button_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo" />
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:text="Created By:"
         android:textStyle="bold"
+        android:textColor="@color/button_color"
         app:layout_constraintBottom_toTopOf="@id/tv2"
         app:layout_constraintStart_toStartOf="@+id/tv2" />
     <TextView
@@ -42,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="KKN Reguler UIM 2025"
+        android:text="Bustanul Khair Rahman"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

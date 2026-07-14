@@ -27,14 +27,17 @@ class MainRepository private constructor(
     private val fusedLocationClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(context)
     }
-    private val executorsService: ExecutorService = Executors.newSingleThreadExecutor()
 
     suspend fun insert(history: HistoryEntity){
-        executorsService.execute { historyDao.insert(history) }
+        historyDao.insert(history)
     }
 
     suspend fun delete(history: HistoryEntity){
-        executorsService.execute { historyDao.delete(history)}
+        historyDao.delete(history)
+    }
+
+    suspend fun deleteAllHistory(){
+        historyDao.deleteAllHistory()
     }
 
     fun getAllHistory(): LiveData<List<HistoryEntity>> = historyDao.getAllHistory()

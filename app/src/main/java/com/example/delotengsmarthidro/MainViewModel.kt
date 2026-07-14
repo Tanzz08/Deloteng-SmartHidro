@@ -10,6 +10,7 @@ import com.example.delotengsmarthidro.data.repository.MainRepository
 import com.example.delotengsmarthidro.data.response.WeatherResponse
 import com.example.delotengsmarthidro.preference.Preference
 import com.example.delotengsmarthidro.utils.ResultState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,6 +29,18 @@ class MainViewModel(
     fun insertHistory(history: HistoryEntity) {
         viewModelScope.launch {
             repository.insert(history)
+        }
+    }
+
+    fun delete(history: HistoryEntity) {
+        viewModelScope.launch {
+            repository.delete(history)
+        }
+    }
+
+    fun deleteAllHistory() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllHistory()
         }
     }
 

@@ -163,7 +163,12 @@ class HomeFragment : Fragment() {
                 }
                 is ResultState.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.shimmerHeader.visibility = View.GONE
                     Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
+
                 }
             }
         }
