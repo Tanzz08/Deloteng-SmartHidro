@@ -7,7 +7,7 @@ object DiseaseData {
             modelKey = "bercak_daun",
             displayName = "Bercak Daun (Crescopora/Septoria)",
             severity = "Waspada (Menengah) 🟡",
-            severityExplanation = "Penyakit ini menurunkan kualitas visual dan harga jual daun selada. Jika dibiarkan, bercak akan menghambat fotosintesis, namun tanaman biasanya masih bisa bertahan hidup jika segera ditangani.",
+            severityExplanation = "<b>Status Panen: Layak Panen Sebagian.</b> Penyakit ini menurunkan kualitas visual dan harga jual daun selada. Jika dibiarkan, bercak akan menghambat fotosintesis, namun tanaman biasanya masih bisa bertahan hidup jika bagian yang sakit segera ditangani.",
             causes = listOf(
                 "Infeksi jamur (seperti Cercospora) atau bakteri patogen.",
                 "Kelembapan udara di sekitar daun terlalu tinggi karena sirkulasi udara buruk.",
@@ -19,7 +19,7 @@ object DiseaseData {
                 "Pada kondisi parah, bagian tengah bercak mengering dan berlubang (seperti mata kodok)."
             ),
             solution = listOf(
-                "<b>Sanitasi Mekanis:</b> Segera potong dan musnahkan helaian daun yang terinfeksi. Jangan membuang sisa daun di sekitar instalasi hidroponik agar spora tidak menyebar.",
+                "<b>Sanitasi Mekanis:</b> Segera potong dan musnahkan helaian daun yang terinfeksi agar bagian yang sehat tetap layak panen. Jangan membuang sisa daun di sekitar instalasi.",
                 "<b>Modifikasi Lingkungan:</b> Renggangkan jarak antar netpot untuk menurunkan tingkat kelembapan (RH) dan memperbaiki sirkulasi udara di kanopi tanaman.",
                 "<b>Pengendalian Nabati/Kimia:</b> Semprotkan fungisida nabati (minyak mimba/neem oil) atau fungisida berbahan aktif tembaga (Mancozeb) pada dosis anjuran, aplikasikan pada sore hari."
             )
@@ -28,7 +28,7 @@ object DiseaseData {
             modelKey = "embun_bulu",
             displayName = "Embun Bulu (Bremia lactucae)",
             severity = "Berbahaya (Tinggi) 🟠",
-            severityExplanation = "Sangat menular! Spora jamur ini sangat mudah diterbangkan angin dan dapat menyebar ke seluruh kanopi instalasi hidroponik dalam hitungan hari. Segera isolasi tanaman yang terinfeksi.",
+            severityExplanation = "<b>Status Panen: Berisiko Gagal Panen Keseluruhan.</b> Sangat menular! Spora jamur ini sangat mudah diterbangkan angin dan dapat menyebar ke seluruh kanopi instalasi hidroponik dalam hitungan hari. Segera isolasi tanaman yang terinfeksi.",
             causes = listOf(
                 "Patogen Bremia lactucae yang terbawa angin atau genangan air.",
                 "Suhu udara sejuk/dingin yang disertai embun tebal di pagi hari.",
@@ -49,7 +49,7 @@ object DiseaseData {
             modelKey = "healthy",
             displayName = "Tanaman Sehat",
             severity = "Aman 🟢",
-            severityExplanation = "Kondisi tanaman optimal. Bebas dari infeksi patogen jamur/bakteri serta tidak menunjukkan indikasi defisiensi nutrisi.",
+            severityExplanation = "<b>Status Panen: Layak Panen Sepenuhnya.</b> Kondisi tanaman optimal. Bebas dari infeksi patogen jamur/bakteri serta tidak menunjukkan indikasi defisiensi nutrisi.",
             causes = listOf(),
             characteristics = listOf(
                 "Daun berwarna hijau cerah, segar, tegak, dan renyah.",
@@ -66,7 +66,7 @@ object DiseaseData {
             modelKey = "embun_tepung",
             displayName = "Embun Tepung (Golovinomyces cichoracearum)",
             severity = "Waspada (Menengah) 🟡",
-            severityExplanation = "Lapisan jamur menghalangi cahaya matahari sehingga menghambat fotosintesis. Hal ini membuat bobot panen menurun dan selada menjadi kerdil, namun tidak langsung mematikan tanaman.",
+            severityExplanation = "<b>Status Panen: Layak Panen Sebagian.</b> Lapisan jamur menghalangi cahaya matahari sehingga menghambat fotosintesis. Hal ini membuat bobot panen menurun dan selada menjadi kerdil, namun tidak langsung mematikan tanaman.",
             causes = listOf(
                 "Infeksi jamur Golovinomyces cichoracearum.",
                 "Kondisi lingkungan kering namun rindang/kurang mendapat sinar matahari langsung.",
@@ -87,7 +87,7 @@ object DiseaseData {
             modelKey = "layu_busuk_akar",
             displayName = "Layu / Gejala Busuk Akar",
             severity = "Kritis 🔴 (Jika Akar Busuk) / Waspada 🟡 (Jika Akar Sehat)",
-            severityExplanation = "Diagnosis Ganda: Jika akar membusuk, ini sangat mematikan karena patogen menyebar lewat air nutrisi di tandon. Jika akar masih putih, tanaman hanya mengalami stres panas/nutrisi dan bisa pulih dengan cepat.",
+            severityExplanation = "<b>Status Panen: Gagal Panen (Jika Akar Busuk) / Layak Panen (Jika Akar Sehat).</b> Diagnosis Ganda: Jika akar membusuk, ini sangat mematikan karena patogen menyebar lewat air nutrisi di tandon. Jika akar masih putih, tanaman hanya mengalami stres panas/nutrisi dan bisa pulih dengan cepat.",
             causes = listOf(
                 "Kondisi 1 (Busuk Akar): Suhu air nutrisi terlalu panas (>28°C) dan minim oksigen terlarut, memicu patogen Pythium menyerang akar.",
                 "Kondisi 2 (Defisiensi Nutrisi/Stres): Kadar PPM AB Mix terlalu rendah, suhu lingkungan terlalu panas, atau pH air melenceng (>6.5 atau <5.5) sehingga nutrisi tidak bisa diserap walaupun akar sehat."
@@ -97,8 +97,8 @@ object DiseaseData {
                 "<b>PANDUAN CEK AKAR (WAJIB DILAKUKAN):</b> Angkat netpot dan periksa kondisi akar di bawah kain flanel untuk menentukan tingkat bahaya sebenarnya."
             ),
             solution = listOf(
-                "<b>DIAGNOSIS A - JIKA AKAR BERWARNA PUTIH & SEHAT (Tingkat: Waspada):</b> Tanaman hanya mengalami stres panas atau kurang nutrisi. <b>Solusi:</b> Periksa kadar PPM nutrisi (sesuaikan ke 600-1000 PPM untuk selada) dan stabilkan pH ke 5.5 - 6.5. Tanaman akan segar kembali.",
-                "<b>DIAGNOSIS B - JIKA AKAR COKELAT, BERLENDIR & BAU (Tingkat: Kritis):</b> Ini adalah Busuk Akar yang menular! <b>Solusi:</b> Segera kuras total bak tandon, sterilisasi bak dengan larutan Hidrogen Peroksida (H2O2 3%) atau sabun. Gunting bagian akar tanaman yang busuk (sisakan yang putih).",
+                "<b>DIAGNOSIS A - JIKA AKAR BERWARNA PUTIH & SEHAT (Aman):</b> Tanaman hanya mengalami stres. <b>Solusi:</b> Periksa kadar PPM nutrisi (sesuaikan ke 600-1000 PPM untuk selada) dan stabilkan pH ke 5.5 - 6.5. Tanaman akan segar kembali dan aman dipanen.",
+                "<b>DIAGNOSIS B - JIKA AKAR COKELAT, BERLENDIR & BAU (Kritis/Gagal Panen):</b> Ini adalah Busuk Akar yang menular! <b>Solusi:</b> Segera cabut tanaman dan buang. Kuras total bak tandon, sterilisasi bak dengan larutan Hidrogen Peroksida (H2O2 3%) atau sabun agar bibit selanjutnya aman.",
                 "<b>Pencegahan Lanjutan:</b> Tambahkan celah udara (air gap) minimal 3 cm antara permukaan air dan dasar netpot agar akar napas tetap berfungsi, serta tutupi bak tandon agar tidak langsung terkena terik matahari."
             )
         ),
@@ -106,10 +106,14 @@ object DiseaseData {
             modelKey = "bukan_daun_selada",
             displayName = "Bukan Daun Selada",
             severity = "Tidak Relevan ⚪",
-            severityExplanation = "",
+            severityExplanation = "Objek yang dideteksi tidak dikenali sebagai daun selada. Harap pastikan kamera diarahkan dengan jelas ke daun selada pada sistem hidroponik.",
             causes = listOf(),
             characteristics = listOf(),
-            solution = listOf()
+            solution = listOf(
+                "Arahkan kamera tepat ke bagian daun tanaman.",
+                "Pastikan pencahayaan cukup dan gambar tidak blur.",
+                "Coba ambil gambar dari sudut yang berbeda."
+            )
         )
     )
 
