@@ -8,7 +8,6 @@ Lettuce SmartHidro adalah aplikasi Android terintegrasi yang menyediakan panduan
 *   **Pemrosesan Gambar Fleksibel:** Pengguna dapat mengambil foto atau memilih gambar dari galeri, lalu memotong (*crop*) bagian daun yang ingin dianalisis untuk hasil yang lebih akurat.
 *   **Panduan Interaktif:** Menyediakan pemutaran video panduan seputar budidaya tanaman hidroponik secara mulus.
 *   **Penyimpanan Data Lokal:** Menyimpan riwayat deteksi dan preferensi pengguna untuk akses cepat tanpa internet.
-*   **Peta & Lokasi:** Mendukung pelacakan lokasi atau titik budidaya hidroponik (menggunakan Google Maps).
 
 ## Arsitektur Machine Learning
 Model pendeteksi penyakit dibangun menggunakan arsitektur **Convolutional Neural Network (CNN)** dengan basis pre-trained model **MobileNetV2**.
