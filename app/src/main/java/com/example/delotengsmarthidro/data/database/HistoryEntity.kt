@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "history_table")
 @Parcelize
-data class HistoryEntity (
+data class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0,
@@ -17,7 +17,7 @@ data class HistoryEntity (
     var label: String? = null,
 
     @ColumnInfo(name = "imageUri")
-    var imageUri: String? =  null,
+    var imageUri: String? = null,
 
     @ColumnInfo(name = "timestamp")
     var timestamp: Long = System.currentTimeMillis(),
@@ -27,5 +27,17 @@ data class HistoryEntity (
 
     @ColumnInfo(name = "ciriCiri")
     var ciriCiri: String? = null,
-) : Parcelable
 
+    @ColumnInfo(name = "causes")
+    var causes: String? = null,
+
+    // TAMBAHKAN 2 KOLOM INI
+    @ColumnInfo(name = "severity")
+    var severity: String? = null,
+
+    @ColumnInfo(name = "severityExplanation")
+    var severityExplanation: String? = null,
+
+    @ColumnInfo(name = "confidenceScore")
+    var confidenceScore: Float? = null
+) : Parcelable

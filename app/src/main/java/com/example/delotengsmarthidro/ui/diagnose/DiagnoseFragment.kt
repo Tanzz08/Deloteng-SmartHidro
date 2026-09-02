@@ -9,8 +9,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,7 +26,6 @@ import com.example.delotengsmarthidro.ResultActivity
 import com.example.delotengsmarthidro.adapter.HistoryAdapter
 import com.example.delotengsmarthidro.data.list.disease.DiseaseData
 import com.example.delotengsmarthidro.data.database.HistoryEntity
-import com.example.delotengsmarthidro.data.di.Injection
 import com.example.delotengsmarthidro.databinding.FragmentDiagnoseBinding
 import com.example.delotengsmarthidro.helper.ImageClassifierHelper
 import com.example.delotengsmarthidro.ui.detail.HistoryDetailActivity
@@ -71,10 +72,10 @@ class DiagnoseFragment : Fragment() {
         }
 
         binding.apply {
-            btnUploadImage.setOnClickListener{
+            btnUploadImage.setOnClickListener {
                 startGallery()
             }
-            btnAmbilGambar.setOnClickListener{
+            btnAmbilGambar.setOnClickListener {
                 startCamera()
             }
             binding.btnDiagnose.setOnClickListener {
@@ -105,7 +106,8 @@ class DiagnoseFragment : Fragment() {
                         }
 
                         // **PERUBAHAN KUNCI 1: SALIN GAMBAR KE FILE PERMANEN**
-                        val permanentImageUri = saveImageToInternalStorage(requireContext(), currentImageUri)
+                        val permanentImageUri =
+                            saveImageToInternalStorage(requireContext(), currentImageUri)
                         if (permanentImageUri == null) {
                             Log.e("DiagnoseFragment", "Failed to save image to internal storage.")
                             showToast("Gagal menyimpan gambar riwayat.")
@@ -113,38 +115,53 @@ class DiagnoseFragment : Fragment() {
                         }
                         // **SELESAI**
 
+                        // ... di dalam onResults ...
                         results?.let {
                             if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
                                 Log.d("Classification Result", it.toString())
 
-                                val label = it[0].categories[0].label
+                                // Ekstrak label dan skor
+                                val category = it[0].categories[0]
+                                val label = category.label
+                                val score =
+                                    category.score // INI ADALAH CONFIDENCE SCORE (Tipe: Float)
+
                                 val disease = DiseaseData.findByLabel(label)
 
-                                // **PERUBAHAN KUNCI 2: GUNAKAN URI PERMANEN**
                                 val imageUriString = permanentImageUri.toString()
                                 val timestamp = System.currentTimeMillis()
                                 var treatmentString: String? = null
                                 var ciriCiriString: String? = null
+                                var causesString: String? = null
+                                var severityString: String? = null
+                                var severityExplanationString: String? = null
 
                                 disease?.let { d ->
                                     ciriCiriString = d.characteristics.joinToString("\n")
+                                    causesString = d.causes.joinToString("\n")
                                     treatmentString = d.solution.joinToString("\n")
                                         .replace("<b>", "")
                                         .replace("</b>", "")
+                                    severityString = d.severity
+                                    severityExplanationString = d.severityExplanation
                                 }
 
                                 val history = HistoryEntity(
-                                    imageUri = imageUriString, // <-- Simpan URI permanen
+                                    imageUri = imageUriString,
                                     label = disease?.displayName ?: label,
                                     timestamp = timestamp,
                                     treatment = treatmentString,
-                                    ciriCiri = ciriCiriString
+                                    ciriCiri = ciriCiriString,
+                                    causes = causesString,
+                                    severity = severityString,
+                                    severityExplanation = severityExplanationString,
+                                    confidenceScore = score // MASUKKAN KE ENTITY
                                 )
 
                                 viewModel.insertHistory(history)
 
-                                // Kirim URI permanen ke ResultActivity
-                                moveToResult(label, imageUriString)
+                                // Kirim score ke ResultActivity (tambahkan parameter score)
+                                moveToResult(label, imageUriString, timestamp, score)
                             } else {
                                 showToast("Pastikan Foto Daun Terlihat Jelas")
                             }
@@ -154,10 +171,46 @@ class DiagnoseFragment : Fragment() {
                 }
             )
 
-            rvHistory.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            btnHistoryOption.setOnClickListener { view ->
+                showHistoryMenu(view)
+            }
+
+            rvHistory.layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
             rvHistory.adapter = adapter
 
         }
+    }
+
+    private fun showHistoryMenu(view: View) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menu.add(0, 1, 0, "Hapus Semua Riwayat")
+
+        popup.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                1 -> {
+                    deleteHistoryData()
+                    true
+                }
+
+                else -> false
+            }
+        }
+        popup.show()
+    }
+
+    private fun deleteHistoryData() {
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("Hapus Riwayat")
+            .setMessage("Apakah Anda yakin ingin menghapus semua riwayat diagnosa?")
+            .setPositiveButton("Hapus") { _, _ ->
+                viewModel.deleteAllHistory()
+
+                Toast.makeText(requireContext(), "Riwayat berhasil dihapus", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            .setNegativeButton("Batal", null)
+            .show()
     }
 
     // **FUNGSI BARU UNTUK MENYIMPAN GAMBAR**
@@ -201,10 +254,11 @@ class DiagnoseFragment : Fragment() {
     }
 
     // mendapatkan hasil uCrop
-    @Deprecated("Deprecated in Java", ReplaceWith(
-        "super.onActivityResult(requestCode, resultCode, data)",
-        "androidx.fragment.app.Fragment"
-    )
+    @Deprecated(
+        "Deprecated in Java", ReplaceWith(
+            "super.onActivityResult(requestCode, resultCode, data)",
+            "androidx.fragment.app.Fragment"
+        )
     )
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         @Suppress("DEPRECATION")
@@ -256,6 +310,7 @@ class DiagnoseFragment : Fragment() {
             viewModel.currentImageUri = null
         }
     }
+
     private fun startCamera() {
         val context = requireContext() // Ambil context di sini
         val file = File(context.cacheDir, "IMG_${System.currentTimeMillis()}.jpg")
@@ -298,10 +353,12 @@ class DiagnoseFragment : Fragment() {
     }
 
     // Ubah parameter fungsi ini
-    private fun moveToResult(result: String, imageUriString: String) {
+    private fun moveToResult(result: String, imageUriString: String, timestamp: Long, score: Float) {
         val intent = Intent(requireActivity(), ResultActivity::class.java)
-        intent.putExtra(ResultActivity.EXTRA_IMAGE_URI, imageUriString) // Gunakan parameter
+        intent.putExtra(ResultActivity.EXTRA_IMAGE_URI, imageUriString)
         intent.putExtra(ResultActivity.EXTRA_RESULT, result)
+        intent.putExtra(ResultActivity.EXTRA_TIMESTAMP, timestamp) // Tambahkan baris ini
+        intent.putExtra(ResultActivity.EXTRA_SCORE, score)
         startActivity(intent)
     }
 

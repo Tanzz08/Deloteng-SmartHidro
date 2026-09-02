@@ -165,58 +165,162 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview"
-                    tools:layout_height="300dp"
-                    android:layout_margin="16dp"
-                    android:padding="8dp"
-
-                    android:orientation="vertical"
-                    android:background="@drawable/corner_diagnose">
+                    app:layout_constraintTop_toBottomOf="@id/textview">
 
                     <TextView
-                        android:id="@id/tvLabel"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvLabel"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="Bacterial Spot"
+                        android:layout_marginBottom="16dp"
+                        tools:text="Bercak Daun"
                         android:textColor="@color/color_label"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
- 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ciri-ciri"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:layout_marginTop="8dp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/tvCiri"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textColor="@color/text_color"
-                        tools:text="@tools:sample/lorem/random"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cara Mengatasi"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="8dp"/>
+                        android:gravity="center"/>
 
                     <TextView
-                        android:id="@+id/tvSolution"
+                        android:id="@+id/tvConfidence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="Tingkat Kepercayaan: 92%" />
+
+                    <TextView
+                        android:id="@+id/tvSeverity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/corner_radius_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        tools:text="Waspada (Menengah) 🟡"
+                        android:textColor="@color/text_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSeverityExplanation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:gravity="center"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="13sp"
+                        android:textStyle="italic"
+                        tools:text="Penjelasan tingkat bahaya akan muncul di sini untuk mengedukasi pengguna." />
+
+                    <TextView
+                        android:id="@+id/tvTimestamp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:gravity="center"
+                        android:textColor="@color/text_color"
+                        android:textSize="12sp"
+                        tools:text="Didiagnosa pada: 12 Agustus 2026, 14:30" />
+
+                    <LinearLayout
+                        android:id="@+id/cardPenyebab"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/corner_diagnose"
+                        android:padding="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Penyebab 🔍"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:drawableEndCompat="@drawable/ic_arrow_down" />
+                        <TextView
+                        android:id="@+id/tvCauses"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_color"
-                        tools:text="@tools:sample/lorem/random"/>
+                        android:visibility="gone"
+                        tools:text="Penjelasan penyebab penyakit..."/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cardCiri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/corner_diagnose"
+                        android:padding="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Ciri-ciri ⚠️"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:drawableEndCompat="@drawable/ic_arrow_down" />
+
+                        <TextView
+                            android:id="@+id/tvCiri"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:lineSpacingExtra="4dp"
+                            android:textColor="@color/text_color"
+                            android:visibility="visible" tools:text="Penjelasan ciri-ciri..."/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cardSolusi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/corner_diagnose"
+                        android:padding="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:id="@+id/tvCaraMengatasi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Cara Mengatasi ✅"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:drawableEndCompat="@drawable/ic_arrow_down" />
+
+                        <TextView
+                            android:id="@+id/tvSolution"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:lineSpacingExtra="4dp"
+                            android:textColor="@color/text_color"
+                            android:visibility="visible" tools:text="Penjelasan cara mengatasi..."/>
+                    </LinearLayout>
+
                 </LinearLayout>
 
 

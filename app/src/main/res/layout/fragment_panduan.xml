@@ -155,6 +155,9 @@
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
                     app:cardUseCompatPadding="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     app:layout_constraintTop_toBottomOf="@id/desc1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -212,6 +215,9 @@
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     app:cardUseCompatPadding="true"
                     app:layout_constraintTop_toBottomOf="@id/contentContainer"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -270,6 +276,9 @@
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     app:cardUseCompatPadding="true"
                     app:layout_constraintTop_toBottomOf="@id/tutor2"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -328,6 +337,9 @@
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     app:cardUseCompatPadding="true"
                     app:layout_constraintTop_toBottomOf="@id/tutor3"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -386,6 +398,9 @@
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     app:cardUseCompatPadding="true"
                     app:layout_constraintTop_toBottomOf="@id/tutor4"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -452,6 +467,7 @@
                     android:textAlignment="center"/>
 
                 <FrameLayout
+                    android:id="@+id/pencegahan_section"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
@@ -480,6 +496,92 @@
 
 
                 </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_timAhli"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Panduan Oleh :"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pencegahan_section"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16sp" />
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_timAhli"
+                    android:padding="16dp"
+                    tools:layout_height="500dp" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/fikram"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/nama"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Fikram Fahrumansyah, S.P., M.P."
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toEndOf="@+id/imageView10"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Universitas Islam Makassar"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/nama"
+                            app:layout_constraintTop_toBottomOf="@+id/nama" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="S1 - Agroteknologi"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView2"
+                            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="SINTA ID : 6915335"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView4"
+                            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
